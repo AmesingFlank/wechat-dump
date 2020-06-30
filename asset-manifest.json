@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/wechat-dump/static/css/main.229145e5.chunk.css",
+    "main.js": "/wechat-dump/static/js/main.de348101.chunk.js",
+    "main.js.map": "/wechat-dump/static/js/main.de348101.chunk.js.map",
+    "runtime-main.js": "/wechat-dump/static/js/runtime-main.e38ea199.js",
+    "runtime-main.js.map": "/wechat-dump/static/js/runtime-main.e38ea199.js.map",
+    "static/js/2.0f12c022.chunk.js": "/wechat-dump/static/js/2.0f12c022.chunk.js",
+    "static/js/2.0f12c022.chunk.js.map": "/wechat-dump/static/js/2.0f12c022.chunk.js.map",
+    "index.html": "/wechat-dump/index.html",
+    "precache-manifest.18f2d9cf78f547fcf5548f0f8076eae7.js": "/wechat-dump/precache-manifest.18f2d9cf78f547fcf5548f0f8076eae7.js",
+    "service-worker.js": "/wechat-dump/service-worker.js",
+    "static/css/main.229145e5.chunk.css.map": "/wechat-dump/static/css/main.229145e5.chunk.css.map",
+    "static/js/2.0f12c022.chunk.js.LICENSE.txt": "/wechat-dump/static/js/2.0f12c022.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e38ea199.js",
+    "static/js/2.0f12c022.chunk.js",
+    "static/css/main.229145e5.chunk.css",
+    "static/js/main.de348101.chunk.js"
+  ]
+}
