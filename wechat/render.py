@@ -24,7 +24,8 @@ from .common.textutil import ensure_unicode, get_file_b64
 from .common.progress import ProgressReporter
 from .common.timer import timing
 from .smiley import SmileyProvider
-from .msgslice import MessageSlicerByTime, MessageSlicerBySize
+from .msgslice import MessageSlicerByTime, MessageSlicerByDate
+from .date_to_id import get_html_id_for_date
 
 TEMPLATES_FILES = {TYPE_MSG: "TP_MSG",
                    TYPE_IMG: "TP_IMG",
@@ -89,13 +90,17 @@ class HTMLRender(object):
         self.final_js = u"\n".join(map(process, self.js_string))
         return self.final_js
 
+    
+
     #@timing(total=True)
     def render_msg(self, msg):
         """ render a message, return the html block"""
         # TODO for chatroom, add nickname on avatar
         sender = u'you ' + msg.talker if not msg.isSend else 'me'
         format_dict = {'sender_label': sender,
-                       'time': msg.createTime }
+                       'time': msg.createTime,
+                       'id':get_html_id_for_date(msg.createTime)
+                        }
         if(not msg.isSend and msg.is_chatroom()):
             format_dict['nickname'] = '>\n       <pre align=\'left\'>'+msg.talker_nickname+'</pre'
         else:
@@ -108,7 +113,11 @@ class HTMLRender(object):
             return template.format(**format_dict)
 
         template = TEMPLATES.get(msg.type)
-        if msg.type == TYPE_SPEAK:
+        if msg.type == TYPE_MSG:
+            content = msg.msg_str()
+            format_dict['content'] = self.smiley.replace_smileycode(content)
+            return template.format(**format_dict)
+        elif msg.type == TYPE_SPEAK:
             audio_str, duration = self.res.get_voice_mp3(msg.imgPath)
             format_dict['voice_duration'] = duration
             format_dict['voice_str'] = audio_str
@@ -171,7 +180,7 @@ class HTMLRender(object):
             return fallback()
         return fallback()
 
-    def _render_partial_msgs(self, msgs):
+    def _render_partial_msgs(self, msgs,next_date,prev_date):
         """ return single html"""
         self.smiley.reset()
         slicer = MessageSlicerByTime()
@@ -182,18 +191,40 @@ class HTMLRender(object):
             nowtime = slice[0].createTime
             if idx == 0 or \
                slices[idx - 1][0].createTime.date() != nowtime.date():
-                timestr = nowtime.strftime("%m/%d %H:%M:%S")
+                timestr = nowtime.strftime("%Y/%m/%d %H:%M:%S")
             else:
                 timestr = nowtime.strftime("%H:%M:%S")
             blocks.append(self.time_html.format(time=timestr))
             blocks.extend([self.render_msg(m) for m in slice])
             self.prgs.trigger(len(slice))
 
+
+        next_date_div = ""
+        if next_date is not None:
+            next_date_str = next_date.strftime("%Y_%m_%d")
+            next_date_div = '''
+            <div class="chatTitle">
+                <button onclick = 'window.location.href = "/pages/dates/{}.html"'>下一天</button>
+            </div>
+            '''.format(next_date_str)
+
+        prev_date_div = ""
+        if prev_date is not None:
+            prev_date_str = prev_date.strftime("%Y_%m_%d")
+            prev_date_div = '''
+            <div class="chatTitle">
+                <button onclick = 'window.location.href = "/pages/dates/{}.html"'>上一天</button>
+            </div>
+            '''.format(prev_date_str)
+            
+
         # string operation is extremely slow
         return self.html.format(extra_css=self.all_css,
                             extra_js=self.all_js,
                             chat=msgs[0].chat_nickname,
-                            messages=u''.join(blocks)
+                            messages=u''.join(blocks),
+                            next = next_date_div,
+                            prev = prev_date_div
                            )
 
     def prepare_avatar_css(self, talkers):
@@ -221,8 +252,22 @@ class HTMLRender(object):
             len(msgs), chat))
 
         self.prgs = ProgressReporter("Render", total=len(msgs))
-        slice_by_size = MessageSlicerBySize().slice(msgs)
-        ret = [self._render_partial_msgs(s) for s in slice_by_size]
+        slices_by_date = MessageSlicerByDate().slice(msgs)
+        ret = [ ]
+        for i in range(len(slices_by_date)):
+            s = slices_by_date[i]
+            this_date = s[0].createTime
+
+            next_date = None
+            if i < len(slices_by_date)-1:
+                next_date = slices_by_date[i+1][0].createTime
+
+            prev_date = None
+            if i > 0:
+                prev_date = slices_by_date[i-1][0].createTime
+            
+            ret.append( (self._render_partial_msgs(s,next_date,prev_date),this_date) )
+            print("done slice:",i,"/",len(slices_by_date))
         self.prgs.finish()
         return ret
 

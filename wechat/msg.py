@@ -26,6 +26,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from .common.textutil import ensure_unicode
+from .date_to_id import get_html_id_for_date
 
 
 class WeChatMsg(object):
@@ -122,10 +123,8 @@ class WeChatMsg(object):
         return msg
 
     def __repr__(self):
-        ret = "{}|{}:{}:{}".format(
-            self.type,
-            self.talker_nickname if not self.isSend else 'me',
-            self.createTime,
+        ret = "{}:{}".format(
+            get_html_id_for_date(self.createTime),
             ensure_unicode(self.msg_str()))
         if self.imgPath:
             ret = "{}|img:{}".format(ensure_unicode(ret.strip()), self.imgPath)

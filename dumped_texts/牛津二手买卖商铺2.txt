@@ -1,0 +1,28 @@
+570425393|牛津二手买卖商铺2:2020-06-28 21:31:07:<sysmsg type="sysmsgtemplate">
+	<sysmsgtemplate>
+		<content_template type="tmpl_type_profile">
+			<plain><![CDATA[]]></plain>
+			<template><![CDATA[$username$ invited $names$ to the group chat]]></template>
+			<link_list>
+				<link name="username" type="link_profile">
+					<memberlist>
+						<member>
+							<username><![CDATA[xiajinnu]]></username>
+							<nickname><![CDATA[夏弩弩]]></nickname>
+						</member>
+					</memberlist>
+				</link>
+				<link name="names" type="link_profile">
+					<memberlist>
+						<member>
+							<username><![CDATA[hjx19960122]]></username>
+							<nickname><![CDATA[walnut girl]]></nickname>
+						</member>
+					</memberlist>
+					<separator><![CDATA[, ]]></separator>
+				</link>
+			</link_list>
+		</content_template>
+	</sysmsgtemplate>
+</sysmsg>
+

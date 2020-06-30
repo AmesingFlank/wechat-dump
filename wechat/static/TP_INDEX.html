@@ -10,16 +10,27 @@
 <body>
   <div id="chat" class="chatPanel normalPanel">
     <div class="chatMainPanel" id="chatMainPanel" style="padding-top:40px;">
-      <div class="chatTitle" style="margin-top: -40px;">
+      <div class="chatTitle">
+        <button onclick = 'window.location.href = "/pages/home/home-app/build/index.html"'>返回</button>
+      </div>
+      
+      {prev}
+
+      <div class="chatTitle">
         <div class="chatNameWrap">
           <p class="chatName" id="messagePanelTitle">{chat}</p>
         </div>
       </div>
+
+      
       <div class="chatScorll" style="position: relative; font-family:initial;">
         <div id="chat_chatmsglist" class="chatContent" style="position: absolute;">
           {messages}
         </div>
       </div>
+
+      {next}
+
     </div>
   </div>
 </body>

@@ -1,5 +1,29 @@
 # -*- coding: UTF-8 -*-
 
+class MessageSlicerByDate:
+    
+
+    def slice(self, msgs):
+        ret = []
+        now = []
+        for m in msgs:
+            if len(now) == 0:
+                now.append(m)
+                continue
+            nowtime, lasttime = m.createTime, now[-1].createTime
+            
+            if nowtime.date().day == lasttime.date().day:
+                now.append(m)
+                continue
+
+            ret.append(now)
+            now = [m]
+        ret.append(now)
+
+        assert len(msgs) == sum([len(k) for k in ret])
+        return ret
+
+
 class MessageSlicerByTime:
     """ Separate messages into slices by time,
         for time display in html.

@@ -1,0 +1,27 @@
+.calender-div {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goto-date {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-pics {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
