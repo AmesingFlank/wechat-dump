@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pages/home/home-app/build/static/css/main.229145e5.chunk.css",
+    "main.js": "/pages/home/home-app/build/static/js/main.2bf0421f.chunk.js",
+    "main.js.map": "/pages/home/home-app/build/static/js/main.2bf0421f.chunk.js.map",
+    "runtime-main.js": "/pages/home/home-app/build/static/js/runtime-main.ea12f4e8.js",
+    "runtime-main.js.map": "/pages/home/home-app/build/static/js/runtime-main.ea12f4e8.js.map",
+    "static/js/2.0f12c022.chunk.js": "/pages/home/home-app/build/static/js/2.0f12c022.chunk.js",
+    "static/js/2.0f12c022.chunk.js.map": "/pages/home/home-app/build/static/js/2.0f12c022.chunk.js.map",
+    "index.html": "/pages/home/home-app/build/index.html",
+    "precache-manifest.0804b65d18d156f9753224480d8180d6.js": "/pages/home/home-app/build/precache-manifest.0804b65d18d156f9753224480d8180d6.js",
+    "service-worker.js": "/pages/home/home-app/build/service-worker.js",
+    "static/css/main.229145e5.chunk.css.map": "/pages/home/home-app/build/static/css/main.229145e5.chunk.css.map",
+    "static/js/2.0f12c022.chunk.js.LICENSE.txt": "/pages/home/home-app/build/static/js/2.0f12c022.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ea12f4e8.js",
+    "static/js/2.0f12c022.chunk.js",
+    "static/css/main.229145e5.chunk.css",
+    "static/js/main.2bf0421f.chunk.js"
+  ]
+}
