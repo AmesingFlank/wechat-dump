@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wechat-dump/precache-manifest.2e7e875034cf9ab2ab8e72b4bdb3d707.js"
+  "/wechat-dump/precache-manifest.9f7f16a232088a993c5dd9e0caa2ebca.js"
 );
 
 self.addEventListener('message', (event) => {
